@@ -45,17 +45,18 @@
             bakery.js
         </span>
     </h1>
-    <span id="fork-me">
-    </span>
+    <nav>
+    </nav>
+    <br class="clear">
 </header>
 <article>
     <section id="section-about">
         <h1>About</h1>
-        <fieldset>
+        <fieldset id="field-about-what">
             <legend>What's bakery.js?</legend>
             <div class="content">
                 A JavaScript framework,
-                which enables you a really simple, flexible and a bit perfunctory develop.
+                which enables you a really simple, flexible and a bit perfunctory development.
                 <br>
                 Baker provides:
                 <ul class='depth-1'>
@@ -67,22 +68,22 @@
                         <ul class="depth-2">
                             <li>
                                 <a>Baker.draw.js</a>
-                                <i class='small'>(coming soon!)</i>
+                                <i class='small'>(coming soon)</i>
                             </li>
                             <li>
                                 <a>Baker.validator.js</a>
-                                <i class='small'>(coming soon!)</i>
+                                <i class='small'>(coming soon)</i>
                             </li>
                             <li>
                                 <a>jQuery.baker.js</a>
-                                <i class='small'>(coming soon!)</i>
+                                <i class='small'>(coming soon)</i>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset id="field-about-why">
             <legend>Why bakery.js?</legend>
             <div class="content">
                 There are lots of JavaScript libraries which enables you object-orient programming.
@@ -96,13 +97,14 @@
     </section>
     <section id="section-how-to">
         <h1>How To</h1>
-        <fieldset>
+        <fieldset id="field-how-to-basic">
             <legend>Basic Use</legend>
             <div class="content">
                 Define object <i><b>Person</b></i>
                 and create an instance of it, <i><b>he</b></i>
 <pre class="js">
 (function (B) {
+    &nbsp;
     var Person = B.define({
         init:function (name) {
             //initializor for the object
@@ -116,22 +118,39 @@
                 var msg = 'Hello! My name is ' + s.name + '.';
                 if(s.love) msg += ' I love ' + s.love + '.';
                 console.log(msg);
-            }
+            },
+            love:null
         }
     });
-
+    &nbsp;
     var he = new Person('John');
     he.love = 'chickens';
-    he.introduce(); // >> "Hello! My name is John. I love chickens."
+    he.introduce();
+            // >> "Hello! My name is John. I love chickens."
+    &nbsp;
 })(Bakery);
 </pre>
+                <p>
+                    The function passed as <b><i>init</i></b> will be executed
+                    only once when instance created with <i>'new'</i> operator.
+                </p>
+                <p>
+                    Values declared in <b><i>property</i></b>, like <b><i>'introduce'</i></b> in above example,
+                    will be shared with all instances of same object. (It's because they're stored in <i>prototype</i>.)
+                </p>
+                <p>
+                    On the other hand, <i><b>'love'</b></i> is also declared as <b><i>property</i></b>
+                    but the value <i><b>'chickens'</b></i> is not shared in any other instance. Because when you
+                    set a value via instance, it will be stored instance itself, not prototype.
+                </p>
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset id="field-how-to-inherit">
             <legend>Inheritance</legend>
             Define <i><b>SoccerPlayer</b></i>, which inherits <i><b>Person</b></i>.
 <pre class="js">
 (function(B){
+    &nbsp;
     var Person = B.define({/*...*/}); //same as above.
     var SoccerPlayer = B.define({
         prototype:Person,
@@ -147,41 +166,147 @@
             }
         }
     });
+    &nbsp;
     var john = new SoccerPlayer('John', 'striker');
     john.love = 'chickens';
-    john.sayPosition(); // >> "my position is striker;
-
-
-
+    john.sayPosition();
+            // >> "my position is striker;
+    &nbsp;
     //call a method defined in Person.
-    john.introduce(); // >> "Hello! My name is John. I love chickens."
-
+    john.introduce();
+            // >> "Hello! My name is John. I love chickens."
+    &nbsp;
 })(Bakery);
 </pre>
         </fieldset>
-        <fieldset>
+        <fieldset id="field-how-to-field">
             <legend>Field</legend>
+            Define <i><b>Fruit</b></i> with fields <i><b>name</b></i> and <i><b>color</b></i>.
+            <br>Bakery.js automatically creates accessor for fields.
 <pre class="js">
-(function(B){
-
+(function (B) {
+    &nbsp;
+    var Fruit = B.define({
+        field:{
+            name:'default-name',  //will be accessor
+            color:'default-color'
+        },
+        property:{
+            describe:function () {
+                var s = this;
+                var name = s.name(), //works as getter
+                    color = s.color();
+                var msg = 'This is a ' + name
+                    + ', fruit with color ' + color + '.';
+                console.log(msg);
+            }
+        }
+    });
+    &nbsp;
+    var banana = new Fruit();
+    banana.color('yellow').name('banana'); //works as setter,
+    banana.describe();
+            // >>'This is a banana, fruit with color yellow.'
+    &nbsp;
 })(Bakery);
 </pre>
+            <p>
+                Accessor works as setter when some value passed in arguments,
+                and works as getter when not.
+            </p>
+            <p>
+                Fields actual value is stored in instance with key which has
+                prefix '_' with accessor name. (ex. <b><i>'_color'&nbsp;</i></b>  for color).
+                <br>
+                So in the above example, <b><i>banana._color</i></b> is equivalent to
+                <b><i>banana.color()</i></b>, but I recommend to use latter.
+            </p>
         </fieldset>
-        <fieldset>
+        <fieldset id="field-how-to-mixin">
             <legend>Mixin</legend>
+            Define <b><i>Orange</i></b> which inherits <b><i>Fruit</i></b> and
+            add properties with mixin <b><i>WithPeel</i></b>.
 <pre class="js">
 (function(B){
+    var Fruit = B.define({/*...*/}); //same as above
+    var Orange = B.define({
+        prototype:Fruit,
+        init:function(){
+            var s = this;
+            s.name('orange').color('orange');
+        }
+    });
+    var WithPeel = new B.Mixin({
+        peeled:false,
+        peel:function(){
+            var s = this;
+            s.peeld = true;
+            var name = s.name();
+            var msg = 'You just peeled the ' + name + '!';
+            console.log(msg);
+        }
+    });
+    Orange.__mixin__(WithPeel);
 
+    var orange = new Orange();
+    orange.describe();
+        // >> 'This is a orange, fruit with color orange.'
+    orange.peel();
+        // >> 'You just peeled the orange!'
 })(Bakery);
 </pre>
+        <p>
+            A powerful thing with <b><i>Mixin</i></b> is that
+            you can reuse it without regard to the inheritance tree.
+            <br>
+            You can mixin <b><i>'WithPeel'</i></b> to non-<b><i>Fruit</i></b>
+            object like <b><i>Vegetable</i></b>.
+        </p>
         </fieldset>
-        <fieldset>
+        <fieldset id="field-how-to-expand">
             <legend>Extend</legend>
+            <p>
+                Define <b><i>Coffee</i></b> object and define <b><i>sugar</i></b>
+                amount to the <b><i>Coffee</i></b> Object it self.
+            </p>
 <pre class="js">
 (function(B){
+    var Coffee = B.define({
+        field:{
+            sugar:null
+        },
+        property:{
+            taste:function(){
+                var s = this;
+                var sugar = s.sugar();
+                var msg = 'This is a coffee with ' + sugar + '.';
+                console.log(msg);
+            }
+        }
 
+    }).__extend__({
+        //will be set to the defined Object itself, not instances
+        sugar:{
+            a_lot:'a lot of sugar',
+            a_little:'litter sugar',
+            none:'sugar free'
+        }
+    });
+    var coffee = new Coffee();
+    coffee.sugar(Coffee.sugar.a_lot);
+    coffee.taste();
+            // >> 'This is a coffee with a lot of sugar'
 })(Bakery);
 </pre>
+        <p>
+            <b><i>__extend__</i></b> is useful for define constant value
+            which belongs to the object.
+        </p>
+        <p>
+            Furthermore, you can <b><i>__extend__</i></b> for namespace separation.
+            If you define <b><i>Latte</i></b> and pass it to <i><b>Coffee</b></i>,
+            you can encapsulate it like <i><b> new Coffee.Latte() </b></i>.
+        </p>
         </fieldset>
     </section>
     <section id="section-download">
@@ -192,14 +317,6 @@
             </a>
         </div>
     </section>
-    <section id="section-demo">
-        <h1>Demo</h1>
-        <div class="content">
-
-        </div>
-    </section>
-
-
 
     <br class="clear">
 </article>

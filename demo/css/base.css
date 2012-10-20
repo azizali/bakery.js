@@ -138,6 +138,7 @@ fieldset > .content{
 legend{
     font-weight: bolder;
     color: #DF570B;
+    padding: 2px 4px;
 }
 .small{
     font-size: 0.75em;
@@ -181,6 +182,7 @@ section > .content{
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    font-family: Verdana, Tahoma;
 }
 .snippet-wrap .snippet-no-num{
     padding: 10px 0;

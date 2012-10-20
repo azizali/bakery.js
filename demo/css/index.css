@@ -5,3 +5,45 @@
 #section-about ul.depth-2{
     margin-top:5px;
 }
+
+header h1{
+    float: left;
+}
+nav {
+    float: left;
+    margin: 0 10px;
+}
+nav a{
+    color: #F0FDF0;
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #ABA;s
+}
+nav a:hover{
+    background-color: #787;
+    text-decoration: none;
+}
+
+section nav{
+    display: inline;
+    font-size: 14px;
+    margin: 0 10px;
+    float: none;
+}
+section nav a{
+    font-size: 0.75em;
+    background-color: transparent;
+    color: #DF570B;
+    font-weight: bold;
+    padding: 8px 10px;
+}
+section nav a:hover{
+    color: #f2a10c;
+    text-decoration: underline;
+    background-color: transparent;
+}
+section nav a:active{
+    background-color: transparent;
+    color: #a66e08;
+}
