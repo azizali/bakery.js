@@ -196,3 +196,8 @@ section > .content{
 .snippet-wrap .snippet-no-num li{
     line-height: 1.5em;
 }
+
+
+.large{
+    font-size: 2em;
+}
