@@ -129,9 +129,8 @@ a:hover{
 fieldset{
     background-color: #FEFFFE;
     margin-bottom:15px;
-    max-width: 600px;
 }
-fieldset .content{
+fieldset > .content{
     margin:5px 10px;
     color:#363F35;
 }
@@ -141,4 +140,36 @@ legend{
 }
 .small{
     font-size: 0.75em;
+}
+
+section{
+    max-width: 600px;
+
+}
+section > .content{
+    margin:5px 20px;
+}
+
+.icon{
+    width:16px;
+    height:16px;
+    display: inline-block;
+    background-position:-10px -10px;
+}
+.icon.download{
+    background-image: url('../img/icon/appbar.cloud.download.png');
+    background-position: -9px -14px;
+    width: 29px;
+}
+.icon.up{
+    background-image: url('../img/icon/appbar.chevron.up.png');
+    width: 27px;
+    background-position: -10px -14px;
+}
+
+.to-top-btn{
+    float: right;
+}
+.clear{
+    clear: both;
 }
