@@ -100,14 +100,16 @@
         <fieldset id="field-how-to-basic">
             <legend>Basic Use</legend>
             <div class="content">
-                Define object <i><b>Person</b></i>
-                and create an instance of it, <i><b>he</b></i>
+                <b><i>Baker.define</i></b> function defines object.
+                <br>
+                For example, define object <i><b>Person</b></i>
+                and create an instance of it, <i><b>he</b></i>.
 <pre class="js">
 (function (B) {
     &nbsp;
     var Person = B.define({
         init:function (name) {
-            //initializor for the object
+            //initializer for the object
             var s = this;
             s.name = name;
         },
@@ -147,7 +149,9 @@
         </fieldset>
         <fieldset id="field-how-to-inherit">
             <legend>Inheritance</legend>
-            Define <i><b>SoccerPlayer</b></i>, which inherits <i><b>Person</b></i>.
+            If you pass <i><b>prototype</b></i> to <b><i>Baker.define</i></b>, the object will inherit it.
+            <br>
+            For example, define <i><b>SoccerPlayer</b></i>, which inherits <i><b>Person</b></i>.
 <pre class="js">
 (function(B){
     &nbsp;
@@ -181,8 +185,10 @@
         </fieldset>
         <fieldset id="field-how-to-field">
             <legend>Field</legend>
-            Define <i><b>Fruit</b></i> with fields <i><b>name</b></i> and <i><b>color</b></i>.
-            <br>Bakery.js automatically creates accessor for fields.
+            When your pass <b><i>field</i></b> to <b><i>Baker.define</i></b>,
+            accessor for fields will be created automatically.
+            <br>
+            For example, define <i><b>Fruit</b></i> with fields <i><b>name</b></i> and <i><b>color</b></i>.
 <pre class="js">
 (function (B) {
     &nbsp;
@@ -224,8 +230,9 @@
         </fieldset>
         <fieldset id="field-how-to-mixin">
             <legend>Mixin</legend>
-            Define <b><i>Orange</i></b> which inherits <b><i>Fruit</i></b> and
-            add properties with mixin <b><i>WithPeel</i></b>.
+            <b><i>.__mixin__()</i></b> function add properties dynamically to the object.
+            For example, define <b><i>Orange</i></b> which inherits <b><i>Fruit</i></b> and
+            use mixin <b><i>WithPeel</i></b> with it.
 <pre class="js">
 (function(B){
     var Fruit = B.define({/*...*/}); //same as above
@@ -265,10 +272,10 @@
         </fieldset>
         <fieldset id="field-how-to-expand">
             <legend>Extend</legend>
-            <p>
-                Define <b><i>Coffee</i></b> object and define <b><i>sugar</i></b>
-                amount to the <b><i>Coffee</i></b> Object it self.
-            </p>
+                <b><i>.__extend()</i></b> function add values to object itself.
+                <br>
+                For example, define <b><i>Coffee</i></b> object and define <b><i>sugar</i></b>
+                amount to the <b><i>Coffee</i></b>.
 <pre class="js">
 (function(B){
     var Coffee = B.define({
@@ -299,7 +306,7 @@
 })(Bakery);
 </pre>
         <p>
-            <b><i>__extend__</i></b> is useful for define constant value
+            As you see, <b><i>.__extend__()</i></b> is useful for define constant value
             which belongs to the object.
         </p>
         <p>
