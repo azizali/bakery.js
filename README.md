@@ -1,4 +1,4 @@
 bakery.js
 =========
 
-javascript library
+javascript libraryA
