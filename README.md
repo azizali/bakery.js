@@ -1,4 +1,6 @@
 bakery.js
 =========
 
-javascript libraryA
+javascript library
+
+http://techbakery.net/bakery.js
