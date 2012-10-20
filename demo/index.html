@@ -9,10 +9,14 @@
     <meta property='op:type' content="'website">
     <meta name='viewport' content="width=device-width,maximum-scale=1">
 
+
+    <link rel="stylesheet" href="css/jquery.snippet.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <script type="text/javascript" src="../bakery.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.snippet.min.js"></script>
+
     <script type="text/javascript" src="../bakery.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
@@ -34,7 +38,7 @@
     <span id="fork-me">
     </span>
 </header>
-<div id="content">
+<article>
     <section id="section-about">
         <h1>About</h1>
         <fieldset>
@@ -82,9 +86,35 @@
     </section>
     <section id="section-how-to">
         <h1>How To</h1>
-        <div class="content">
+        <fieldset>
+            <legend>Basic Use</legend>
+            <div class="content">
+                Define object <i><b>Person</b></i>
+                and create an instance of it, <i><b>me</b></i>
+<pre class="js">
+(function (B) {
+    var Person = B.define({
+        init:function (name) {
+            var s = this;
+            s.name = name;
+        },
+        property:{
+            introduce:function(){
+                var s = this;
+                var msg = 'Hello! My name is' + s.name + '.';
+                if(s.love) msg += ' I love ' + s.love + '.';
+                console.log(msg);
+            }
+        }
+    });
 
-        </div>
+    var me = new Person('John');
+    me.love = 'chickens';
+    me.introduce(); // >> "Hello! My name is John. I love chickens."
+})(Bakery);
+</pre>
+            </div>
+        </fieldset>
     </section>
     <section id="section-download">
         <h1>Download</h1>
@@ -102,11 +132,12 @@
     </section>
 
 
-    <a class="to-top-btn" href="#"><i class="icon up"></i>to page top</a>
 
     <br class="clear">
-
-</div>
+</article>
+<a class="to-top-btn" href="#"><i class="icon up"></i>to page top</a>
+<br class="clear">
+<br class="clear">
 <footer>
     <span class="me">
         Created By

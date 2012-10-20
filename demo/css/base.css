@@ -87,7 +87,8 @@ header h1:active{
     -ms-box-shadow: none;
     box-shadow: none;
 }
-#content{
+article{
+    max-width: 600px;
     padding: 10px 20px;
 }
 
@@ -141,10 +142,8 @@ legend{
 .small{
     font-size: 0.75em;
 }
-
 section{
-    max-width: 600px;
-
+    margin-bottom: 40px;
 }
 section > .content{
     margin:5px 20px;
@@ -172,4 +171,24 @@ section > .content{
 }
 .clear{
     clear: both;
+}
+
+.snippet-container{
+
+}
+.snippet-wrap pre.sh_sourceCode{
+    padding: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.snippet-wrap .snippet-no-num{
+    padding: 10px 0;
+    border-color:#E7E7E7;
+    border-style: solid;
+    border-width:1px 0;
+    margin:0;
+}
+.snippet-wrap .snippet-no-num li{
+    line-height: 1.5em;
 }
