@@ -131,24 +131,32 @@
             <legend>Inheritance</legend>
             Define <i><b>SoccerPlayer</b></i>, which inherits <i><b>Person</b></i>.
 <pre class="js">
-var SoccerPlayer = B.define({
-    prototype:Person,
-    init:function(name, position){
-        var s = this;
-        s.name = name;
-        s.position = position;
-    },
-    property:{
-        sayPosition:function(){
+(function(B){
+    var Person = B.define({/*...*/}); //same as above.
+    var SoccerPlayer = B.define({
+        prototype:Person,
+        init:function(name, position){
             var s = this;
-            console.log('My position is' + s.position + '.');
+            s.name = name;
+            s.position = position;
+        },
+        property:{
+            sayPosition:function(){
+                var s = this;
+                console.log('My position is' + s.position + '.');
+            }
         }
-    }
-});
-var john = new SoccerPlayer('John', 'striker');
-john.love = 'chickens';
-john.introduce(); // >> "Hello! My name is John. I love chickens."
-john.sayPosition(); // >> "my position is striker;
+    });
+    var john = new SoccerPlayer('John', 'striker');
+    john.love = 'chickens';
+    john.sayPosition(); // >> "my position is striker;
+
+
+
+    //call a method defined in Person.
+    john.introduce(); // >> "Hello! My name is John. I love chickens."
+
+})(Bakery);
 </pre>
         </fieldset>
         <fieldset>
