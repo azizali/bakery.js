@@ -100,18 +100,20 @@
             <legend>Basic Use</legend>
             <div class="content">
                 Define object <i><b>Person</b></i>
-                and create an instance of it, <i><b>me</b></i>
+                and create an instance of it, <i><b>he</b></i>
 <pre class="js">
 (function (B) {
     var Person = B.define({
         init:function (name) {
+            //initializor for the object
             var s = this;
             s.name = name;
         },
         property:{
+            //property definitions for the object
             introduce:function(){
                 var s = this;
-                var msg = 'Hello! My name is' + s.name + '.';
+                var msg = 'Hello! My name is ' + s.name + '.';
                 if(s.love) msg += ' I love ' + s.love + '.';
                 console.log(msg);
             }
@@ -127,11 +129,26 @@
         </fieldset>
         <fieldset>
             <legend>Inheritance</legend>
-
+            Define <i><b>SoccerPlayer</b></i>, which inherits <i><b>Person</b></i>.
 <pre class="js">
-(function(B){
-
-})(Bakery);
+var SoccerPlayer = B.define({
+    prototype:Person,
+    init:function(name, position){
+        var s = this;
+        s.name = name;
+        s.position = position;
+    },
+    property:{
+        sayPosition:function(){
+            var s = this;
+            console.log('My position is' + s.position + '.');
+        }
+    }
+});
+var john = new SoccerPlayer('John', 'striker');
+john.love = 'chickens';
+john.introduce(); // >> "Hello! My name is John. I love chickens."
+john.sayPosition(); // >> "my position is striker;
 </pre>
         </fieldset>
         <fieldset>
