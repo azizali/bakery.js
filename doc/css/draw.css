@@ -7,12 +7,12 @@ body{
 
 header h1{
     background-color: #FCEE7C;
-    color: #635F0B;
+    color: #683D0E;
     border-color: #ede075;
 }
 header h1:hover{
     background-color: #fff17d;
-    color: #7c770e;
+    color: #7e4a11;
 }
 header h1:active{
     background-color: #7c770e;
