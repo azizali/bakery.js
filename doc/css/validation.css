@@ -1,5 +1,5 @@
 html{
-    background-color: #655;
+    background-color: #250B0B;
 }
 body{
     background-color: #EDD;
@@ -31,11 +31,11 @@ header h1:active{
 
 
 footer{
-    background-color: #877;
+    background-color: #7C4B4B;
     color: #fdecec;
 }
 #copy-right{
-    color: #655;
+    color: #5E3E3E;
 }
 footer a, footer li{
     color: #eec3c5;
