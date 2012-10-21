@@ -15,9 +15,9 @@ header{
     padding: 0;
 }
 header h1{
-    padding: 40px 30px;
+    padding: 65px 30px;
     display: inline-block;
-    margin: 0;
+    margin: 0 10px 0 0;
     background-color: #164212;
     border: 1px solid #0B2209;
     cursor: default;

@@ -5,24 +5,39 @@
 #section-about ul.depth-2{
     margin-top:5px;
 }
-
+header{
+    height: 35px;
+}
 header h1{
     float: left;
 }
 nav {
-    float: left;
     margin: 0 20px;
+    max-width:780px;
+    text-align: right;
 }
 nav a{
     color: #F0FDF0;
     display: inline-block;
     padding: 10px 20px;
     text-align: center;
-    background-color: #ABA;s
+    background-color: #ABA;
 }
 nav a:hover{
     background-color: #787;
     text-decoration: none;
+}
+article{
+    position: relative;
+}
+article .sub-title{
+    position: absolute;
+    top: -25px;
+    font-size: 1em;
+    left: 30px;
+    font-style: italic;
+    color: silver;
+    font-family: 'Times New Roman', 'Lucida Console';
 }
 
 section nav{
