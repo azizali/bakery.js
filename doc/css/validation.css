@@ -1,0 +1,46 @@
+html{
+    background-color: #655;
+}
+body{
+    background-color: #EDD;
+    color: #533;
+}
+
+header h1{
+    background-color: #FDFDFD;
+    color: #e02d2d;
+    border-color: #EDD;
+}
+header h1:hover{
+    background-color: #FFF;
+    color: #F04444;
+}
+header h1:active{
+    background-color: #EEE;
+    border-color: #EEE;
+}
+#fork-me-btn .ribbon{
+    background-color: #FAA;
+}
+#fork-me-btn:hover .ribbon{
+    background-color: #FAA;
+}
+#fork-me-btn:active .ribbon{
+
+}
+
+
+footer{
+    background-color: #877;
+    color: #fdecec;
+}
+#copy-right{
+    color: #655;
+}
+footer a, footer li{
+    color: #eec3c5;
+}
+
+a{
+    color: #855;
+}
