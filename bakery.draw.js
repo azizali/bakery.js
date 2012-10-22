@@ -126,31 +126,38 @@ Bakery.draw = (function(B){
 
 
     d.Animation = B.define({
-        init:function(render){
+        init:function(canvas, render){
             var s = this;
-            s.frameCount = 0;
-            s.pausing = false;
-            s.stoped = false;
-            s.render = render;
+            s.render(render);
+            s.canvas(canvas);
         },
-
+        field:{
+            render:null,
+            frameCount:0,
+            pausing:false,
+            stopped:false,
+            canvas:null
+        },
         property:{
-            start:function(ctx){
-                if(ctx instanceof HTMLCanvasElement){
-                    ctx = ctx.getContext('2d');
-                }
+            start:function(){
+                var s = this,
+                    canvas = s.canvas(),
+                    ctx = canvas.getContext('2d');
 
-                var s = this;
                 var executeRender = function(){
-                    if(s.stoped) return;
-                    requestAnimationFrame(executeRender);
-                    if(s.pausing) return;
-                    s.frameCount ++;
+                    if(s.stopped()) return;
+                    d.Animation.requestAnimationFrame.call(window, executeRender);
+                    if(s.pausing()) return;
+                    var frameCount = s.frameCount();
+                    frameCount ++;
 
                     ctx.save();
-                    s.render.call(s, ctx, s.frameCount);
-                    ctx.restore();
 
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    s.render().call(s, ctx, frameCount);
+
+                    ctx.restore();
+                    s.frameCount(frameCount);
                 };
                 executeRender();
             },
