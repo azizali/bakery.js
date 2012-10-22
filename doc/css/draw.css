@@ -3,6 +3,7 @@ html{
 }
 body{
     background-color: #faffd3;
+    color:#421212;
 }
 
 header h1{
@@ -38,4 +39,11 @@ footer{
 }
 footer a, footer li {
     color: #AFAF04;
+}
+
+nav a{
+    background-color: #979B78;
+}
+nav a:hover{
+    background-color: #aaae87;
 }
