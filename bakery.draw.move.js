@@ -20,6 +20,14 @@ Bakery.draw.move = (function (B) {
     });
 
     m.Move = new B.Mixin({
+        _velocity:new m.Velocity(0.4, 0.4),
+        velocity:function(x, y){
+            var s = this;
+            if(!arguments.length) return s._velocity;
+            s._velocity = arguments[0] instanceof m.Velocity?
+                arguments[0] : new m.Velocity(x, y);
+            return s;
+        },
         move:function(point){
             var s = this;
             if(point) return s.point(point);
@@ -28,8 +36,7 @@ Bakery.draw.move = (function (B) {
             return s;
         }
     }).__field__({
-            pause:false,
-            velocity:new m.Velocity(0.3, 0.3)
+            pause:false
         });
 
 

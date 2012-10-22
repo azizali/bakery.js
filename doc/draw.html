@@ -76,8 +76,55 @@
     <section id="section-how-to">
         <h1>How To</h1>
         <fieldset id="field-how-to-basic">
-            <canvas class="demo" id="demo-canvas-01">
-            </canvas>
+            <legend>Basic Use</legend>
+            <div class="content">
+                <b>Bakery.draw</b> is mainly consisted of three packages --
+                <b><i>drawable</i></b>, <b><i>move</i></b>, and <b><i>Animation</i></b>.
+                <br>
+                <b><i>drawable</i></b> package is a set of Bakery objects which have shape, color, shadow, or anything about appearances.
+                <br>
+                <b><i>move</i></b> package provides mix-in objects which make drawable-object movable.
+                <br>
+                <b><i>Animation</i></b> objects manage animation frames.
+                <br><br>
+                For example, create a ball-shape object and
+                bounce it within a canvas.
+                <br>
+                <canvas class="demo" id="demo-canvas-01">
+                </canvas>
+<pre class="js">
+(function(B){
+
+    var Ball = B.define({
+        prototype:B.draw.drawable.Circle
+    }).__mixin__(B.draw.move.Move);
+
+    var ball = new Ball().point(40, 40)
+        .radius(30)
+        .velocity(1, 1);
+
+    var canvas = document.getElementById('demo-canvas-01');
+
+    new B.draw.Animation(canvas).render(function(ctx, canvasSize){
+        //render callbacks are called for each frame of animation
+        ball
+            .move() //move function changes the object location due to it's velocity
+            .draw(ctx);
+
+        //bounce when exceed canvas
+        var x = ball.point().x();
+        if(x < 0 || canvasSize.width() < x){
+            ball.velocity().revertX();
+        }
+        var y = ball.point().y();
+        if(y < 0 || canvasSize.height() < y){
+            ball.velocity().revertY();
+        }
+    }).start();
+
+})(Bakery);
+</pre>
+            </div>
         </fieldset>
     </section>
     <section id="section-api">

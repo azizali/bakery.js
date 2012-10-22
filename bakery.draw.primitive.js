@@ -131,11 +131,13 @@ Bakery.draw = (function(B){
                 return s.top(y - height / 2)
                     .bottom(y +  height / 2);
             },
-            size:function(size){
+            size:function(width, height){
                 var s = this;
                 if(!arguments.length) {
                     return new d.Size(s.width(), s.height());
                 }
+                var size = arguments[0] instanceof s.Size ?
+                    arguments[0]:new d.Size(width, height);
                 return s.width(size.width()).height(size.height());
             },
             toString:function(){

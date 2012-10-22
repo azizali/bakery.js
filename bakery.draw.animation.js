@@ -37,9 +37,10 @@ Bakery.draw.Animation = (function(B){
                     frameCount ++;
 
                     ctx.save();
+                    var size = new B.draw.Size(canvas.width, canvas.height);
 
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    s.render().call(s, ctx, frameCount);
+                    s.render().call(s, ctx, size, frameCount);
 
                     ctx.restore();
                     s.frameCount(frameCount);

@@ -8,11 +8,31 @@ Bakery.draw.drawable = (function (B) {
     d.Drawable = B.define({
         field:{
             strokeColor:new HSV(200, 100, 100),
-            fillColor:new HSV(20, 100, 100),
-            point:new Point(0, 0),
-            size:new Size(100, 100)
+            fillColor:new HSV(20, 100, 100)
         },
         property:{
+            _point:new Point(0, 0),
+            _size:new Size(100, 100),
+            point:function(x, y){
+                var s = this;
+                if(!arguments.length) return s._point;
+                if(arguments[0] instanceof Point){
+                    s._point = arguments[0];
+                } else {
+                    s._point = new Point(x, y);
+                }
+                return s;
+            },
+            size:function(width, height){
+                var s = this;
+                if(!arguments.length) return s._size;
+                if(arguments[0] instanceof Size){
+                    s._size = arguments[0];
+                } else {
+                    s._size = new Size(width, height);
+                }
+                return s;
+            },
             draw:null
         }
     });
@@ -36,6 +56,9 @@ Bakery.draw.drawable = (function (B) {
     });
     d.Circle = B.define({
         prototype:d.Drawable,
+        field:{
+            fillColor:new HSV(20, 20, 100)
+        },
         property:{
             _radius:100,
             radius:function(radius){
