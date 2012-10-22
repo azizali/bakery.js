@@ -10,14 +10,14 @@ $.fn.extend({
 
 
             var Paper = B.define({
-                prototype:B.draw.drawable.Drawable
+                prototype:B.draw.drawable.Circle
             }).__mixin__(B.draw.move.Move);
 
             var ball = new Paper();
             ball.point(new B.draw.Point(100, 100)).size(new B.draw.Size(10, 10));
             var animation = new B.draw.Animation(canvas, function(ctx, frameCount){
                 ball
-                    .move()
+//                    .move()
                     .draw(ctx);
             });
             animation.start();

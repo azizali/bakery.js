@@ -82,6 +82,11 @@ Bakery = (function () {
             return func;
         };
 
+        func.prototype.__super__ = function(){
+            var s = this;
+            return s.__proto__.__proto__;
+        };
+
         return func;
     };
 
