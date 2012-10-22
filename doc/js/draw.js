@@ -7,9 +7,18 @@ $.fn.extend({
             /* if you use jQuery, */
             // var canvas = $('#demo-how-to').get(0);
 
-            var ball = new B.draw.drawable.Drawable();
+
+
+            var Paper = B.define({
+                prototype:B.draw.drawable.Drawable
+            }).__mixin__(B.draw.move.Move);
+
+            var ball = new Paper();
+            ball.point(new B.draw.Point(100, 100)).size(new B.draw.Size(10, 10));
             var animation = new B.draw.Animation(canvas, function(ctx, frameCount){
-                ball.draw(ctx);
+                ball
+                    .move()
+                    .draw(ctx);
             });
             animation.start();
         })(Bakery);

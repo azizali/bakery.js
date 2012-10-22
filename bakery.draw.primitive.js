@@ -9,7 +9,7 @@ Bakery.draw = (function(B){
         init:function (x, y) {
             var s = this;
             s.x(x)
-                .y(y || x);
+                .y(y);
         },
         field:{
             x:0,
@@ -66,7 +66,7 @@ Bakery.draw = (function(B){
     d.Size = B.define({
         init:function(width, height){
             var s = this;
-            s.width(width).height(height || width);
+            s.width(width).height(height);
         },
         field:{
             width:0,
@@ -126,7 +126,7 @@ Bakery.draw = (function(B){
             },
             height:function(height){
                 var s = this;
-                if(!arguments.length) return s.top() - s.bottom();
+                if(!arguments.length) return s.bottom() - s.top();
                 var y = s.center().y();
                 return s.top(y - height / 2)
                     .bottom(y +  height / 2);
@@ -136,7 +136,7 @@ Bakery.draw = (function(B){
                 if(!arguments.length) {
                     return new d.Size(s.width(), s.height());
                 }
-                return s.width(size.width()).height(s.height());
+                return s.width(size.width()).height(size.height());
             },
             toString:function(){
                 var s = this;

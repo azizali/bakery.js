@@ -8,8 +8,21 @@
 Bakery = (function () {
 
 
-    var Bakery = {};
+    var B = {};
 
+    B.meta = {
+        defineField:function(obj, name, val){
+            var actualName = '_' + name;
+            obj[actualName] = val;
+            obj[name] = function (val) {
+                var s = this;
+                if (!arguments.length) return s[actualName];
+                s[actualName] = val;
+                return s;
+            }
+
+        }
+    };
 
 
 
@@ -30,7 +43,7 @@ Bakery = (function () {
      *     .__mixin__(mixin)
      *     .__extend__()
      */
-    var define = Bakery.define = function (def) {
+    var define = B.define = function (def) {
 
         var func = def.init || function () {};
 
@@ -47,14 +60,7 @@ Bakery = (function () {
             //field names will be used for accessor.
             //actual name of filed variable is prefixed with '_'.
             Object.keys(def.field).forEach(function (name) {
-                var actualName = '_' + name;
-                func.prototype[actualName] = def.field[name];
-                func.prototype[name] = function (val) {
-                    var s = this;
-                    if (!arguments.length) return s[actualName];
-                    s[actualName] = val;
-                    return s;
-                }
+                B.meta.defineField(func.prototype, name, def.field[name]);
             });
         }
 
@@ -90,7 +96,7 @@ Bakery = (function () {
      *  be extended.
      *
      */
-    var Mixin = Bakery.Mixin = define({
+    B.Mixin = define({
         init:function (definitions) {
             var s = this;
             for (var i = arguments.length - 1; i >= 0; i--) {
@@ -101,15 +107,23 @@ Bakery = (function () {
                     }
                 }
             }
+        },
+        property:{
+            __field__:function(def){
+                var s = this;
+                for(var key in def){
+                    if(def.hasOwnProperty(key)){
+                        B.meta.defineField(s, key, def[key]);
+                    }
+                }
+                return s;
+            }
         }
     });
 
 
 
 
-
-
-
-    return Bakery;
+    return B;
 })();
 
