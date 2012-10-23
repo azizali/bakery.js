@@ -20,12 +20,13 @@ $.fn.extend({
                     .draw(ctx);
 
                 //bounce when exceed canvas
+                var r = ball.radius();
                 var x = ball.point().x();
-                if(x < 0 || canvasSize.width() < x){
+                if(x < r || canvasSize.width() < x + r){
                     ball.velocity().revertX();
                 }
                 var y = ball.point().y();
-                if(y < 0 || canvasSize.height() < y){
+                if(y < r || canvasSize.height() < y + r){
                     ball.velocity().revertY();
                 }
 
@@ -42,15 +43,14 @@ $.fn.extend({
                 move:function(canvasSize){
                     var s = this;
                     //bounce when exceed canvas
-                    var x = s.point().x();
-                    if(x < 0 || canvasSize.width() < x){
+                    var x = s.point().x(), w = s.size().width();
+                    if(x < w || canvasSize.width() < x + w){
                         s.velocity().revertX();
                     }
-                    var y = s.point().y();
-                    if(y < 0 || canvasSize.height() < y){
+                    var y = s.point().y(), h = s.size().height();
+                    if(y < h || canvasSize.height() < y + h){
                         s.velocity().revertY();
                     }
-
                     return Move.move.call(s); //call original .move() function
                 }
             }, Move);
@@ -89,29 +89,35 @@ $.fn.extend({
         var field = $(this);
         (function(B){
             var Move = B.draw.move.Move;
+
             var BounceMove = new B.Mixin({
                 move:function(canvasSize){
                     var s = this;
                     //bounce when exceed canvas
-                    var x = s.point().x();
-                    if(x < 0 || canvasSize.width() < x){
+                    var x = s.point().x(), w = s.size().width();
+                    if(x < w || canvasSize.width() < x + w){
                         s.velocity().revertX();
                     }
-                    var y = s.point().y();
-                    if(y < 0 || canvasSize.height() < y){
+                    var y = s.point().y(), h = s.size().height();
+                    if(y < h || canvasSize.height() < y + h){
                         s.velocity().revertY();
                     }
-
                     return Move.move.call(s); //call original .move() function
                 }
             }, Move);
+
             var CollideBallMove = new B.Mixin({
                 findCollided:function (balls) {
                     var s = this;
                     for(var i=0; i<balls.length; i++){
                         var ball = balls[i];
+                        if(ball === s){
+                            continue;
+                        }
                         var distance = s.point().distance(ball.point());
-                        if(distance < ball.radius() * 2) return ball;
+                        if(distance < ball.radius() * 2) {
+                            return ball;
+                        }
                     }
                     return null;
                 },
@@ -121,8 +127,8 @@ $.fn.extend({
                     var x = ball.point().x() - s.point().x(),
                         y = ball.point().y() - s.point().y();
                     var vector = new B.draw.move.Velocity(x, y).normalize();
-//                    s.velocity(vector.clone().multify(s.velocity().amount()));
-//                    ball.velocity(vector.clone().revert().multify(ball.velocity().amount()));
+                    ball.velocity(vector.clone().multify(ball.velocity().amount()));
+                    s.velocity(vector.clone().revert().multify(s.velocity().amount()));
                     return s;
                 }
             }, BounceMove);
@@ -134,7 +140,7 @@ $.fn.extend({
                 var balls = [], HSV = B.draw.color.HSV;
                 for(var i=0; i<count; i++){
                     var color = new HSV(B.util.math.randomInt(360), 20, 90);
-                    var x = 55 * i % 200, y = 55 *  ( i/4);
+                    var x = 55 * (i+1) % 200, y = 40 *  (i/4 + 1);
                     var ball = new Ball()
                         .radius(15)
                         .point(x, y)
@@ -143,16 +149,19 @@ $.fn.extend({
                     balls.push(ball);
                 }
                 return balls;
-            })(10);
+            })(9);
 
             var canvas = document.getElementById('demo-canvas-03');
             new B.draw.Animation(canvas).render(function(ctx, canvasSize){
                 for(var i=0; i<balls.length; i++){
                     var ball = balls[i];
+                    canvasSize.shrink
                     ball.move(canvasSize)
                         .draw(ctx);
                     var collided = ball.findCollided(balls);
-                    ball.repel(collided);
+                    if(collided){
+                        ball.repel(collided);
+                    }
                 }
             }).start();
         })(Bakery);
