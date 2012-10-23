@@ -42,11 +42,11 @@ footer a, footer li {
 }
 
 nav a{
-    background-color: #979B78;
+    background-color: #8D843F;
     color:#FDF9F0;
 }
 nav a:hover{
-    background-color: #aaae87;
+    background-color: #beb255;
 }
 
 canvas.demo

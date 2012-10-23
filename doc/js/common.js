@@ -14,9 +14,12 @@ $(function () {
     var headNav = $('header nav', body);
     $('section', body).each(function () {
         var section = $(this),
+            page = section.attr('data-page') || '',
             id = section.attr('id'),
             title = $('h1', section).text();
-        $('<a/>').attr('href', '#' + id)
+
+        var ref = page + '#' + id ;
+        $('<a/>').attr('href', ref)
             .text(title)
             .appendTo(headNav);
         var nav = $('<nav/>').appendTo(section.find('h1'));

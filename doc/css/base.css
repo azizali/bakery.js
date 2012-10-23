@@ -271,3 +271,7 @@ a.keyword:active
     text-decoration-style: dotted;
     color: #555;
 }
+
+.hidden{
+    display: none;
+}

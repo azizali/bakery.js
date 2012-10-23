@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <meta name='author' content='okunishinishi@gmail.com'>
     <meta name='description'
           content="bakery.js is a JavaScript framework, which enables you a really simple, flexible and a bit perfunctory development. ">
@@ -8,7 +9,6 @@
     <meta property='op:title' content="bakery.js">
     <meta property='op:url' content="http://techbakery.net/bakery.js/doc">
     <meta name='viewport' content="width=device-width,maximum-scale=1">
-
 
     <link rel="stylesheet" href="css/jquery.snippet.min.css">
     <link rel="stylesheet" href="css/base.css">
@@ -38,7 +38,6 @@
 </head>
 <body>
 <header>
-
     <a id="fork-me-btn" href="https://github.com/okunishinishi">
             <span class="ribbon">
                 Fork me <br/> on GitHub
@@ -276,51 +275,11 @@
             <br>For more information , see <a href="draw.api.html">the api doc</a>.
         </fieldset>
     </section>
-    <section id="section-api">
+    <section id="section-api" class="hidden" data-page='draw.api.html'>
         <h1>API</h1>
-        <fieldset id="field-api-animation">
-            <legend>Animation</legend>
-            <dl>
-                <dt>Bakery.draw.Animation</dt>
-                <dd></dd>
-            </dl>
-        </fieldset>
-        <fieldset id="field-api-primitive">
-            <legend>primitives</legend>
-            <dl>
-                <dt>Bakery.draw.Point</dt>
-                <dd></dd>
-                <dt>Bakery.draw.Size</dt>
-                <dd></dd>
-                <dt>Bakery.draw.Area</dt>
-                <dd></dd>
-                <dt>Baker.draw.color.RGBA</dt>
-                <dd></dd>
-                <dt>Baker.draw.color.HSV</dt>
-            </dl>
-        </fieldset>
-        <fieldset id="field-api-drawable">
-            <legend>drawable</legend>
-            <dl>
-                <dt>Bakery.draw.drawable.Drawable</dt>
-                <dd></dd>
-                <dt>Bakery.draw.drawable.Rectangle</dt>
-                <dd></dd>
-                <dt>Bakery.draw.drawable.Circle</dt>
-                <dd></dd>
-            </dl>
-        </fieldset>
-        <fidleset id="field-api-move">
-            <legend>move</legend>
-            <dl>
-                <dt>Bakery.draw.move.Move</dt>
-                <dd></dd>
-            </dl>
-        </fidleset>
     </section>
-</article>
-</body>
 
+</article>
 <br class="clear">
 <a class="to-top-btn" href="#"><i class="icon up"></i>to page top</a>
 <br class="clear">
@@ -336,8 +295,9 @@
         <li><a href="http://braggarts.info">Braggarts</a></li>
     </ul>
     <br>
-    <div id="copy-right">
+    <small id="copy-right">
         Copyright (c) 2012 Taka Okunishi
-    </div>
+    </small>
 </footer>
+</body>
 </html>
