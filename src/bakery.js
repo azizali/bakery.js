@@ -132,5 +132,3 @@ Bakery = (function () {
     return B;
 })();
 
-
-
