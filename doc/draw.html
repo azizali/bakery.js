@@ -18,6 +18,11 @@
     <script type="text/javascript" src="js/jquery.snippet.min.js"></script>
 
     <script type="text/javascript" src="../bakery.js"></script>
+
+    <!--<script type="text/javascript" src="../bakery.util.js"></script>-->
+    <script type="text/javascript" src="../bakery.util.basic.js"></script>
+    <script type="text/javascript" src="../bakery.util.math.js"></script>
+
     <!--<script type="text/javascript" src="../bakery.draw.js"></script>-->
     <script type="text/javascript" src="../bakery.draw.primitive.js"></script>
     <script type="text/javascript" src="../bakery.draw.color.js"></script>
@@ -81,9 +86,9 @@
                 <b>Bakery.draw</b> is mainly consisted of three packages --
                 <b><i>drawable</i></b>, <b><i>move</i></b>, and <b><i>Animation</i></b>.
                 <br>
-                <b><i>drawable</i></b> package is a set of Bakery objects which have shape, color, shadow, or anything about appearances.
+                <b><i>drawable</i></b> package is a set of <a href="index.html#field-how-to-basic" class="keyword">Bakery objects</a> which have shape, color, shadow, or anything about appearances.
                 <br>
-                <b><i>move</i></b> package provides mix-in objects which make drawable-object movable.
+                <b><i>move</i></b> package provides <a href="index.html#field-how-to-mixin" class="keyword">mixin</a> objects which make drawable-object movable.
                 <br>
                 <b><i>Animation</i></b> objects manage animation frames.
                 <br><br>
@@ -124,28 +129,124 @@
 
 })(Bakery);
 </pre>
-                What above code do is:
-                <ol>
-                    <li>Define Ball object which inherits circle-shape</li>
-                    <li>Add move feature to the Ball object with Move-mixin.</li>
-                    <li>Create a ball instance and set it's properties</li>
-                    <li>Create an animation with a canvas</li>
-                    <li>Pass the canvas a rendering function which decides the ball's behavior.</li>
-                </ol>
             </div>
+            If your new to <i>Bakery.js</i> and don't know <b><i>B.define</i></b>,
+            see the <a href="index.html">document about <i>Bakery.js</i> basic</a>.
+        </fieldset>
+        <fieldset id="field-how-to-mixin-move">
+            <legend>Reuse Move-Behavior Definition</legend>
+            <div class="content">
+                In the <a href="#field-how-to-basic">previous example</a>, move-behavior was defined in the callback of <b><i>Animation.render().</i></b>
+                    It works fine, but what if you want to another drawable to move the same way?
+                <br>
+                For next step, define a custom <a href="index.html#field-how-to-mixin" class="keyword">mixin</a>
+                <b><i>BounceMove</i></b> so that you can reuse it to other objects.
+            </div>
+            <br>
+            <canvas class="demo" id="demo-canvas-02"></canvas>
+            <pre class="js">
+(function(B){
+    var Move = B.draw.move.Move;
+    //define movement to reuse as mixin
+    var BounceMove = new B.Mixin({
+        move:function(canvasSize){
+            var s = this;
+            //bounce when exceed canvas
+            var x = s.point().x();
+            if(x < 0 || canvasSize.width() < x){
+                s.velocity().revertX();
+            }
+            var y = s.point().y();
+            if(y < 0 || canvasSize.height() < y){
+                s.velocity().revertY();
+            }
+
+            return Move.move.call(s); //call original .move() function
+        }
+    }, Move);
+
+    var Ball = B.define({
+        prototype:B.draw.drawable.Circle
+    }).__mixin__(BounceMove);
+
+    var balls = [], HSV = B.draw.color.HSV;
+    for(var i=0; i<10; i++){
+        var color = new HSV(
+            B.util.math.randomInt(360), 20, 100
+        );
+        var ball = new Ball().point(40, 40)
+            .fillColor(color)
+            .radius(20).velocity(Math.random(), Math.random());
+        balls.push(ball)
+    }
+
+    var canvas = document.getElementById('demo-canvas-02');
+    new B.draw.Animation(canvas).render(function(ctx, canvasSize){
+        balls.forEach(function(ball){
+            ball.move(canvasSize).draw(ctx);
+        })
+    }).start();
+
+})(Bakery);
+            </pre>
+            Trick is that you can pass multiple arguments to <b><i>new d.Mixin()</i></b>.
+            If you pass another mixin to the <b><i>new d.Mixin()</i></b> as the second argument or later,
+            it will be overridden by it's previous arguments.
+            <br>So here is the <b><i>BounceMove</i></b> which overrides <b><i>Move</i></b>.
+        </fieldset>
+        <fieldset id="field-hit-detect">
+            <legend>Hit Detect Between Drawable</legend>
+            <div class="content">
+
+            </div>
+            <br>
+            <canvas class="demo" id="demo-canvas-03"></canvas>
+            <pre class="js">
+
+            </pre>
         </fieldset>
     </section>
     <section id="section-api">
         <h1>API</h1>
         <fieldset id="field-api-animation">
             <legend>Animation</legend>
+            <dl>
+                <dt>Bakery.draw.Animation</dt>
+                <dd></dd>
+            </dl>
         </fieldset>
         <fieldset id="field-api-primitive">
             <legend>primitives</legend>
+            <dl>
+                <dt>Bakery.draw.Point</dt>
+                <dd></dd>
+                <dt>Bakery.draw.Size</dt>
+                <dd></dd>
+                <dt>Bakery.draw.Area</dt>
+                <dd></dd>
+                <dt>Baker.draw.color.RGBA</dt>
+                <dd></dd>
+                <dt>Baker.draw.color.HSV</dt>
+            </dl>
         </fieldset>
         <fieldset id="field-api-drawable">
-            <legend>drawables</legend>
+            <legend>drawable</legend>
+            <dl>
+                <dt>Bakery.draw.drawable.Drawable</dt>
+                <dd></dd>
+                <dt>Bakery.draw.drawable.Rectangle</dt>
+                <dd></dd>
+                <dt>Bakery.draw.drawable.Circle</dt>
+                <dd></dd>
+            </dl>
         </fieldset>
+        <fidleset id="field-api-move">
+            <legend>move</legend>
+            <dl>
+                <dt>Bakery.draw.move.Move</dt>
+                <dd></dd>
+            </dl>
+        </fidleset>
     </section>
 </article>
 </body>

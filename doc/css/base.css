@@ -262,3 +262,12 @@ section nav a:active{
 .large{
     font-size: 2em;
 }
+
+a.keyword,
+a.keyword:hover,
+a.keyword:active
+{
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    color: #555;
+}

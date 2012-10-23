@@ -30,6 +30,10 @@ Bakery.draw = (function(B){
                 s.y(s.y() * -1);
                 return s;
             },
+            revert:function(){
+                var s = this;
+                return s.revertX().revertY();
+            },
             toString:function(){
                 var s = this;
                 return '{x:' + s.x() + ',y:' + s.y() + '}';
@@ -136,7 +140,7 @@ Bakery.draw = (function(B){
                 if(!arguments.length) {
                     return new d.Size(s.width(), s.height());
                 }
-                var size = arguments[0] instanceof s.Size ?
+                var size = arguments[0] instanceof d.Size ?
                     arguments[0]:new d.Size(width, height);
                 return s.width(size.width()).height(size.height());
             },

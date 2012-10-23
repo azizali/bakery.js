@@ -15,6 +15,27 @@ Bakery.draw.move = (function (B) {
             toString:function () {
                 var s = this;
                 return '{vx:' + s.x() + ',vy:' + s.y() + '}';
+            },
+            amount:function(){
+                var s = this;
+                return Math.sqrt(Math.pow(s.x(), 2) + Math.pow(s.y(), 2));
+            },
+            normalize:function(){
+                var s = this;
+                var amount = s.amount();
+                if(!amount) return s;
+                return s.multify(1 / amount);
+                return s;
+            },
+            multify:function(amount){
+                var s = this;
+                s.x(s.x() * amount);
+                s.y(s.y() * amount);
+                return s;
+            },
+            clone:function(){
+                var s = this;
+                return new m.Velocity(s.x(), s.y());
             }
         }
     });
