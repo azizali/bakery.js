@@ -142,14 +142,14 @@ $.fn.extend({
                     var color = new HSV(B.util.math.randomInt(360), 20, 90);
                     var x = 55 * (i+1) % 200, y = 40 *  (i/4 + 1);
                     var ball = new Ball()
-                        .radius(15)
+                        .radius(25)
                         .point(x, y)
                         .fillColor(color)
                         .velocity(Math.random(), Math.random());
                     balls.push(ball);
                 }
                 return balls;
-            })(9);
+            })(5);
 
             var canvas = document.getElementById('demo-canvas-03');
             new B.draw.Animation(canvas).render(function(ctx, canvasSize){
