@@ -52,7 +52,7 @@ Bakery.draw.color = (function (B) {
                 //h means hue, 0 ~ 360
                 //s, v means saturation, value of brgitness, 0 ~ 100
                 var rgb = (function (h, s, v) {
-                    if (s == 0) return ({r:v, g:v, b:v});//gray
+                    if (s == 0) return  new c.RGB(v, v, v);//gray
                     h = h % 360;
                     var i = Math.floor(h / 60);
                     var f = h / 60 - i;

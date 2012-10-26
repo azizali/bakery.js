@@ -15,7 +15,7 @@ Bakery.draw.Animation = (function(B){
             var s = this;
             s.render(render);
             s.canvas(canvas);
-            s.drawables = [];
+            s.renderables = [];
         },
         field:{
             render:null,
@@ -25,19 +25,31 @@ Bakery.draw.Animation = (function(B){
             canvas:null
         },
         property:{
-            add:function(drawable){
+            add:function(renderable){
                 var s = this;
-                s.drawables.push(drawable);
+                if(renderable instanceof Array){
+                    renderable.forEach(function(renderable){
+                        s.add(renderable);
+                    });
+                    return s;
+                }
+                s.renderables.push(renderable);
                 return s;
             },
-            remove:function(drawable){
+            remove:function(renderable){
                 var s = this;
+                if(renderable instanceof Array){
+                    renderable.remove(function(renderable){
+                        s.add(renderable);
+                    });
+                    return s;
+                }
                 var length = s.drawables.length;
                 if(!length) return s;
                 for(var i=0; i< length; i++){
-                    var hit = s.drawables[i] === drawable;
+                    var hit = s.drawables[i] === renderable;
                     if(hit){
-                        s.drawables.splice(i, 1);
+                        s.renderables.splice(i, 1);
                         return s;
                     }
                 }
@@ -61,6 +73,11 @@ Bakery.draw.Animation = (function(B){
 
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+                    for(var i=0; i< s.renderables.length; i++){
+                        var renderable = s.renderables[i];
+                        renderable.move && renderable.move.call(renderable);
+                        renderable.draw && renderable.draw.call(renderable, ctx);
+                    }
 
                     s.render().call(s, ctx, size, frameCount);
 

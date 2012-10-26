@@ -127,6 +127,12 @@ Bakery = (function () {
     });
 
 
+    B.repeat = function(callback, times){
+        for(var i=0; i<times; i++){
+            callback();
+        }
+    };
+
 
 
     return B;
