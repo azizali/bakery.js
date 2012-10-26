@@ -275,3 +275,10 @@ a.keyword:active
 .hidden{
     display: none;
 }
+
+th{
+    text-align: left;
+}
+th,td{
+    padding: 5px 10px;
+}

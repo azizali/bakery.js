@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="css/jquery.snippet.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/draw.css">
+    <style type="text/css">
+        section{
+            max-width: 900px;
+        }
+    </style>
 
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="js/jquery.snippet.min.js"></script>
@@ -67,8 +72,40 @@
             <legend>Animation</legend>
             <dl>
                 <dt>Bakery.draw.Animation</dt>
-                <dd>
 
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Animation(canvas)</th>
+                            <td>create new instance width canvas to draw.</td>
+                        </tr>
+                        <tr>
+                            <th data-label='field'>.render(callback)</th>
+                            <td>
+                                Set callback for render.
+
+                                callback(ctx, CanvasSize, frameCount);
+                                <br>
+                                <sub>Don't forget to call <i>.start()</i> after <i>.render()</i> </sub>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.start()</th>
+                            <td>start animation</td>
+                        </tr>
+                        <tr>
+                            <th>.stop()</th>
+                            <td>stop animation</td>
+                        </tr>
+                        <tr>
+                            <th>.pause()</th>
+                            <td>pause animation</td>
+                        </tr>
+                        <tr>
+                            <th>.remove()</th>
+                            <td>resume paused animation</td>
+                        </tr>
+                    </table>
                 </dd>
             </dl>
         </fieldset>
@@ -76,7 +113,9 @@
             <legend>primitives</legend>
             <dl>
                 <dt>Bakery.draw.Point</dt>
-                <dd></dd>
+                <dd>
+
+                </dd>
                 <dt>Bakery.draw.Size</dt>
                 <dd></dd>
                 <dt>Bakery.draw.Area</dt>

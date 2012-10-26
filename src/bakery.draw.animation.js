@@ -15,6 +15,7 @@ Bakery.draw.Animation = (function(B){
             var s = this;
             s.render(render);
             s.canvas(canvas);
+            s.drawables = [];
         },
         field:{
             render:null,
@@ -24,6 +25,24 @@ Bakery.draw.Animation = (function(B){
             canvas:null
         },
         property:{
+            add:function(drawable){
+                var s = this;
+                s.drawables.push(drawable);
+                return s;
+            },
+            remove:function(drawable){
+                var s = this;
+                var length = s.drawables.length;
+                if(!length) return s;
+                for(var i=0; i< length; i++){
+                    var hit = s.drawables[i] === drawable;
+                    if(hit){
+                        s.drawables.splice(i, 1);
+                        return s;
+                    }
+                }
+                return s;
+            },
             start:function(){
                 var s = this,
                     canvas = s.canvas(),
@@ -39,7 +58,10 @@ Bakery.draw.Animation = (function(B){
                     ctx.save();
                     var size = new B.draw.Size(canvas.width, canvas.height);
 
+
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
                     s.render().call(s, ctx, size, frameCount);
 
                     ctx.restore();

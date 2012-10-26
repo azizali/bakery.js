@@ -56,3 +56,12 @@ canvas.demo
     border: 1px solid #EEE;
     background: #FDFDF0;
 }
+table{
+
+}
+tr{
+    background-color: #FEFEFD;
+}
+tr:nth-child(even){
+    background-color: #EED;
+}
