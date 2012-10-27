@@ -56,12 +56,48 @@ canvas.demo
     border: 1px solid #EEE;
     background: #FDFDF0;
 }
-table{
+
+fieldset{
+
+    background-color: #F5F5DF;
+}
+dl{
 
 }
+dt{
+    padding: 5px 25px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+dd{
+    margin: 5px 0 40px 20px;
+}
+table{
+    border-collapse: collapse;
+    border:1px solid #DBCEAD;
+    margin: 5px;
+}
 tr{
-    background-color: #FEFEFD;
+    background-color: #D6C39B;
 }
 tr:nth-child(even){
-    background-color: #EED;
+    background-color: #ECE0C5;
+}
+th, td{
+    padding:7px 12px;
+}
+th{
+    border-right: 1px solid #F5F5DF;
+    text-align: right;
+}
+th.label.field:before{
+    content: 'field';
+    font-style: italic;
+    font-size: 0.75em;
+    margin: 3px;
+    background-color: #B8440E;
+    padding: 1px 3px;
+    border-radius: 3px;
+    color: #EBDFD0;
+    font-weight: normal;
 }

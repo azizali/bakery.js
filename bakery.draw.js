@@ -232,7 +232,12 @@ Bakery.draw.color = (function (B) {
                 //h means hue, 0 ~ 360
                 //s, v means saturation, value of brgitness, 0 ~ 100
                 var rgb = (function (h, s, v) {
-                    if (s == 0) return  new c.RGB(v, v, v);//gray
+                    if (s == 0) {
+                        //gray
+                        var dense = v / 100 * 255;
+                        return  new c.RGB(dense, dense, dense);
+                    }
+
                     h = h % 360;
                     var i = Math.floor(h / 60);
                     var f = h / 60 - i;
@@ -401,13 +406,15 @@ Bakery.draw.drawable = (function (B) {
 
     var HSV = B.draw.color.HSV,
         Point = B.draw.Point,
-        Size = B.draw.Size;
+        Size = B.draw.Size,
+        Area = B.draw.Area;
 
     var d = {}; //this 'd' will be Bakery.draw.drawable.
     d.Drawable = B.define({
         field:{
             strokeColor:new HSV(200, 100, 100),
-            fillColor:new HSV(20, 100, 100)
+            fillColor:new HSV(20, 100, 100),
+            lineWidth:2
         },
         property:{
             _point:new Point(0, 0),
@@ -432,6 +439,17 @@ Bakery.draw.drawable = (function (B) {
                 }
                 return s;
             },
+            area:function(area){
+                var s = this;
+                if(!arguments.length){
+                    return new Area()
+                        .center(s.point())
+                        .size(s.size());
+                }
+                s.point(area.center())
+                    .size(area.size());
+                return s;
+            },
             draw:null
         }
     });
@@ -440,8 +458,7 @@ Bakery.draw.drawable = (function (B) {
         property:{
             draw:function (ctx) {
                 var s = this;
-                var area = new B.draw.Area().center(s.point())
-                    .size(s.size());
+                var area = s.area();
                 ctx.fillStyle = s.fillColor().toString();
                 ctx.fillRect(
                     area.left(),
@@ -478,6 +495,38 @@ Bakery.draw.drawable = (function (B) {
                 ctx.closePath();
                 return s;
             }
+        }
+    });
+
+    d.Ellipse = B.define({
+       prototype:d.Drawable,
+        field:{
+            fillColor:new HSV(30, 30, 100)
+        },
+        property:{
+
+        },
+        draw:function(ctx){
+            var s = this;
+
+            ctx.beginPath();
+            ctx.fillStyle = s.fillColor().toString();
+
+
+            var area = s.area();
+            var t = area.top(),
+                b = area.bottom(),
+                l = area.left(),
+                r = area.right();
+
+            var x = s.point().x();
+
+            ctx.moveTo(x, t);
+            ctx.bezierCurveTo(r, t, r, b, x, b);
+            ctx.bezierCurveTo(l, b, l, t, x, t);
+
+            ctx.fill();
+            ctx.closePath();
         }
     });
     return d;

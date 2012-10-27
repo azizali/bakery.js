@@ -57,6 +57,7 @@
         </nav>
         <br class="clear">
 </header>
+<br class="clear">
 <article>
 
     <section id="section-about" class="hidden" data-page='draw.html'>
@@ -67,7 +68,163 @@
     </section>
 
     <section id="section-api">
+
         <h1>API (Now Preparing)</h1>
+
+        <fieldset id="field-api-primitive">
+            <legend>primitives</legend>
+            <dl>
+                <dt>bakery.draw.Point</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Point(x,y)</th>
+                            <td>create a point with the values of xy</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">x</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">y</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th>.clone()</th>
+                            <td>create another point with have same xy values</td>
+                        </tr>
+                        <tr>
+                            <th>.revertX()</th>
+                            <td>reverse x value</td>
+                        </tr>
+                        <tr>
+                            <th>.revertY()</th>
+                            <td>reverse y value</td>
+                        </tr>
+                        <tr>
+                            <th>.revert()</th>
+                            <td>reverse xy values</td>
+                        </tr>
+                        <tr>
+                            <th>.add(point)</th>
+                            <td>add xy values of the point</td>
+                        </tr>
+                        <tr>
+                            <th>.subtract()</th>
+                            <td>subtract xy values of the point</td>
+                        </tr>
+                        <tr>
+                            <th>.distance(point)</th>
+                            <td>returns distance with the point</td>
+                        </tr>
+                    </table>
+
+                </dd>
+                <dt>bakery.draw.Size</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Size(width, height)</th>
+                            <td>create a new Size object</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">width</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">height</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th>.clone()</th>
+                            <td>clone itself</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>Bakery.draw.Area</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Area(top, right, bottom, left)</th>
+                            <td>create a new Area object</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">top</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">right</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">bottom</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">left</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">width</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">height</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">size</th>
+                            <td>size object</td>
+                        </tr>
+
+                        <tr>
+                            <th>.size(width, height)</th>
+                            <td>set width and height</td>
+                        </tr>
+                        <tr>
+                            <th>.center()</th>
+                            <td>returns a Point object for center point</td>
+                        </tr>
+                        <tr>
+                            <th>.clone()</th>
+                            <td>returns a clone</td>
+                        </tr>
+                        <tr>
+                            <th>.expand(amount)</th>
+                            <td>
+                                expands it's length to all direction.
+                                center position will not change.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.shrink(amount)</th>
+                            <td>
+                                shrink it's length to all direction.
+                                center position will not change.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.contains(point)</th>
+                            <td>
+                                returns a bool value.
+                            </td>
+                        </tr>
+                    </table>
+                </dd>
+            </dl>
+        </fieldset>
+
+
+        <fieldset id="field-api-color">
+            <legend>color</legend>
+            <dl>
+                <dt>Baker.draw.color.RGBA</dt>
+                <dd></dd>
+                <dt>Baker.draw.color.HSV</dt>
+            </dl>
+        </fieldset>
+
+
         <fieldset id="field-api-animation">
             <legend>Animation</legend>
             <dl>
@@ -109,22 +266,7 @@
                 </dd>
             </dl>
         </fieldset>
-        <fieldset id="field-api-primitive">
-            <legend>primitives</legend>
-            <dl>
-                <dt>Bakery.draw.Point</dt>
-                <dd>
 
-                </dd>
-                <dt>Bakery.draw.Size</dt>
-                <dd></dd>
-                <dt>Bakery.draw.Area</dt>
-                <dd></dd>
-                <dt>Baker.draw.color.RGBA</dt>
-                <dd></dd>
-                <dt>Baker.draw.color.HSV</dt>
-            </dl>
-        </fieldset>
         <fieldset id="field-api-drawable">
             <legend>drawable</legend>
             <dl>

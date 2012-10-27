@@ -97,10 +97,10 @@ Bakery.draw = (function(B){
                 .bottom(bottom || top || 0);
         },
         field:{
-            left:0,
             top:0,
             right:0,
-            bottom:0
+            bottom:0,
+            left:0
         },
         property:{
             center:function(point){
