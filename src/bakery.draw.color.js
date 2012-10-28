@@ -92,7 +92,7 @@ Bakery.draw.color = (function (B) {
             },
             clone:function () {
                 var ss = this;
-                return new HSV(ss.h, ss.s, ss.v);
+                return new c.HSV(ss.h, ss.s, ss.v);
             },
             addHue:function (hue) {
                 var ss = this;

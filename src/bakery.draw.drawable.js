@@ -15,29 +15,29 @@ Bakery.draw.drawable = (function (B) {
         property:{
             _point:new Point(0, 0),
             _size:new Size(100, 100),
-            point:function(x, y){
+            point:function (x, y) {
                 var s = this;
-                if(!arguments.length) return s._point;
-                if(arguments[0] instanceof Point){
+                if (!arguments.length) return s._point;
+                if (arguments[0] instanceof Point) {
                     s._point = arguments[0];
                 } else {
                     s._point = new Point(x, y);
                 }
                 return s;
             },
-            size:function(width, height){
+            size:function (width, height) {
                 var s = this;
-                if(!arguments.length) return s._size;
-                if(arguments[0] instanceof Size){
+                if (!arguments.length) return s._size;
+                if (arguments[0] instanceof Size) {
                     s._size = arguments[0];
                 } else {
                     s._size = new Size(width, height);
                 }
                 return s;
             },
-            area:function(area){
+            area:function (area) {
                 var s = this;
-                if(!arguments.length){
+                if (!arguments.length) {
                     return new Area()
                         .center(s.point())
                         .size(s.size());
@@ -73,14 +73,14 @@ Bakery.draw.drawable = (function (B) {
         },
         property:{
             _radius:100,
-            radius:function(radius){
+            radius:function (radius) {
                 var s = this;
-                if(!arguments.length) return s._radius;
+                if (!arguments.length) return s._radius;
                 s._radius = radius;
                 s.size(new Size(radius, radius));
                 return s;
             },
-            draw:function(ctx){
+            draw:function (ctx) {
                 var s = this,
                     point = s.point(),
                     radius = s.radius();
@@ -95,34 +95,35 @@ Bakery.draw.drawable = (function (B) {
     });
 
     d.Ellipse = B.define({
-       prototype:d.Drawable,
+        prototype:d.Drawable,
         field:{
             fillColor:new HSV(30, 30, 100)
         },
         property:{
 
-        },
-        draw:function(ctx){
-            var s = this;
 
-            ctx.beginPath();
-            ctx.fillStyle = s.fillColor().toString();
+            draw:function (ctx) {
+                var s = this;
+
+                ctx.beginPath();
+                ctx.fillStyle = s.fillColor().toString();
 
 
-            var area = s.area();
-            var t = area.top(),
-                b = area.bottom(),
-                l = area.left(),
-                r = area.right();
+                var area = s.area();
+                var t = area.top(),
+                    b = area.bottom(),
+                    l = area.left(),
+                    r = area.right();
 
-            var x = s.point().x();
+                var x = s.point().x();
 
-            ctx.moveTo(x, t);
-            ctx.bezierCurveTo(r, t, r, b, x, b);
-            ctx.bezierCurveTo(l, b, l, t, x, t);
+                ctx.moveTo(x, t);
+                ctx.bezierCurveTo(r, t, r, b, x, b);
+                ctx.bezierCurveTo(l, b, l, t, x, t);
 
-            ctx.fill();
-            ctx.closePath();
+                ctx.fill();
+                ctx.closePath();
+            }
         }
     });
     return d;
