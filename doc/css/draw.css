@@ -101,3 +101,17 @@ th.label.field:before{
     color: #EBDFD0;
     font-weight: normal;
 }
+aside{
+    position: absolute;
+    right: 0;
+    top: 200px;
+    padding: 10px 20px;
+}
+aside > ul > li{
+    margin: 5px 0;
+}
+
+aside .aside-sub-menu{
+    padding:2px 2px 2px 20px;
+    font-size: 0.75em;
+}
