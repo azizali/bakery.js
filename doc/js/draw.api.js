@@ -52,10 +52,43 @@ $.fn.extend({
         });
 
         return menu;
+    },
+    callTest:function(){
+        return $(this).each(function(){
+            $('dt', this).each(function(){
+                var dt = $(this),
+                    dd = dt.next('dd');
+                var name = dt.text(),
+                    shortName = name.replace(/^.*\./, '');
+                eval('var ' + shortName + ' = ' + name + ';');
+                function assertMethod(method){
+                    var has = false;
+                    eval('has = ' + shortName + '.prototype.hasOwnProperty("' + method + '")');
+                    if(!has){
+                        var err = '[api test failed]there is no method "' + method + '" in ' + shortName;
+                        console.error(err)
+                    }
+                    return has;
+                }
+                $('th', dd).each(function(){
+                    var th = $(this),
+                        name = th.text();
+                    var match = name.match(/(^\.)(.*)(\([^\)]*\))/);
+                    if(match && match.length > 2){
+                        assertMethod(match[2]);
+                    }
+                    if(th.is('.field')){
+                        assertMethod(name);
+                    }
+                });
+            })
+        });
     }
 });
 
 $(function(){
     var apiSection = $('#section-api');
     $('aside').asideMenu(apiSection);
+
+    $('fieldset', apiSection).callTest();
 });
