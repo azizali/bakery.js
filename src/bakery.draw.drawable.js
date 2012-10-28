@@ -33,12 +33,12 @@ Bakery.draw.drawable = (function (B) {
     var d = {}; //this 'd' will be Bakery.draw.drawable.
     d.Drawable = B.define({
         field:{
-            strokeColor:new HSV(200, 100, 100),
-            fillColor:new HSV(20, 100, 100),
-            lineWidth:2,
-            rotate:0,
             fill:true,
-            stroke:false
+            stroke:false,
+            fillColor:new HSV(20, 100, 100),
+            strokeColor:new HSV(200, 100, 100),
+            lineWidth:2,
+            rotate:0
         },
         property:{
             _point:new Point(0, 0),

@@ -41,6 +41,9 @@ footer a, footer li {
     color: #AFAF04;
 }
 
+nav.api{
+    max-width: 1080px;
+}
 nav a{
     background-color: #8D843F;
     color:#FDF9F0;
@@ -115,4 +118,31 @@ aside > ul > li{
 aside .aside-sub-menu{
     padding:2px 2px 2px 20px;
     font-size: 0.75em;
+}
+
+code{
+    font-size: 3em;
+    font-weight: bold;
+    font-style: italic;
+    color: #B9B893;
+    font-family: sans-serif;
+}
+#section-api h1{
+    margin-bottom: 10px;
+}
+
+
+sub.prototype{
+    padding-left: 10px;
+}
+sub.prototype:before{
+    content: 'prototype:';
+    font-style: italic;
+    color:#795F5F;
+    font-size: 0.75em;
+}
+sub.prototype a{
+    color: #B4790F;
+    font-weight: bolder;
+    text-decoration: underline;
 }

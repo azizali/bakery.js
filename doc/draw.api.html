@@ -54,10 +54,11 @@
                     bakery.draw.js
                 </span>
         </h1>
-        <nav>
+        <nav class="api">
         </nav>
-        <br class="clear">
+
 </header>
+<br class="clear">
 <br class="clear">
 <aside></aside>
 <article>
@@ -73,10 +74,11 @@
 
         <h1>API (Now Preparing)</h1>
 
+        <code>var B = Bakery;</code>
         <fieldset id="field-api-primitive">
             <legend>primitives</legend>
             <dl>
-                <dt>Bakery.draw.Point</dt>
+                <dt>B.draw.Point</dt>
                 <dd>
                     <table>
                         <tr>
@@ -122,7 +124,7 @@
                     </table>
 
                 </dd>
-                <dt>Bakery.draw.Size</dt>
+                <dt>B.draw.Size</dt>
                 <dd>
                     <table>
                         <tr>
@@ -143,7 +145,7 @@
                         </tr>
                     </table>
                 </dd>
-                <dt>Bakery.draw.Area</dt>
+                <dt>B.draw.Area</dt>
                 <dd>
                     <table>
                         <tr>
@@ -220,9 +222,9 @@
         <fieldset id="field-api-color">
             <legend>color</legend>
             <dl>
-                <dt>Bakery.draw.color.RGBA</dt>
+                <dt>B.draw.color.RGBA</dt>
                 <dd></dd>
-                <dt>Bakery.draw.color.HSV</dt>
+                <dt>B.draw.color.HSV</dt>
             </dl>
         </fieldset>
 
@@ -230,7 +232,7 @@
         <fieldset id="field-api-animation">
             <legend>Animation</legend>
             <dl>
-                <dt>Bakery.draw.Animation</dt>
+                <dt>B.draw.Animation</dt>
 
                 <dd>
                     <table>
@@ -272,18 +274,182 @@
         <fieldset id="field-api-drawable">
             <legend>drawable</legend>
             <dl>
-                <dt>Bakery.draw.drawable.Drawable</dt>
-                <dd></dd>
-                <dt>Bakery.draw.drawable.Rectangle</dt>
-                <dd></dd>
-                <dt>Bakery.draw.drawable.Circle</dt>
-                <dd></dd>
+                <dt id="dt-drawable">B.draw.drawable.Drawable</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th class="label field">point</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="label field">size</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="label field">area</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th class="label field">fill</th>
+                            <td>flg to fill when draw. default true.</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">stroke</th>
+                            <td>flg to stroke when draw. default false.</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">fillColor</th>
+                            <td>instance of B.draw.color</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">strokeColor</th>
+                            <td>instance of B.draw.color</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">lineWidth</th>
+                            <td>line width for stroke</td>
+                        </tr>
+                        <tr>
+                            <th>.toImg()</th>
+                            <td>
+                                return a canvas element.
+                            </td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>B.draw.drawable.Rectangle<br>
+                    <sub class="prototype">
+                        <a href="#dt-drawable">Drawable</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Rectangle()</th>
+                            <td>
+                                create a new Rectangle object.
+                                <br>you should set color, size, point before draw it.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.draw(ctx)</th>
+                            <td>draw the rectangle</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>
+                    B.draw.drawable.Circle
+                    <br>
+                    <sub class="prototype">
+                        <a href="#dt-drawable">Drawable</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Circle()</th>
+                            <td>
+                                create a new Circle object.
+                                <br>you should set color, radius, point before draw it.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="label field">radius</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th>.draw()</th>
+                            <td>draw the circle</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>
+                    B.draw.drawable.Ellipse
+                    <br>
+                    <sub class="prototype">
+                        <a href="#dt-drawable">Drawable</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Ellipse()</th>
+                            <td>
+                                create a new Ellipse object.
+                                <br>you should set color, size, point before draw it.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.draw()</th>
+                            <td>draw the ellipse</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>
+                    B.draw.drawable.XMark
+                    <br>
+                    <sub class="prototype">
+                        <a href="#dt-drawable">Drawable</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new XMark()</th>
+                            <td>
+                                create new XMark object.
+                                <br>you should set color, radius, point before draw it.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.draw()</th>
+                            <td>
+                                draw the Xmark
+                            </td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>
+                    B.draw.drawable.Star
+                    <br>
+                    <sub class="prototype">
+                        <a href="#dt-drawable">Drawable</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Start()</th>
+                            <td>
+                                create a new Star object
+                                <br>you should it's color, outerRadius, innerRadius, point before draw it.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="label field">vertexCount</th>
+                            <td>number of vertex. default:5</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">outerRadius</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th class="label field">innerRadius</th>
+                            <td>float value</td>
+                        </tr>
+                        <tr>
+                            <th>.draw()</th>
+                            <td>draw the star</td>
+                        </tr>
+                    </table>
+                </dd>
+
             </dl>
         </fieldset>
         <fidleset id="field-api-move">
             <legend>move</legend>
             <dl>
-                <dt>Bakery.draw.move.Move</dt>
+                <dt>B.draw.move.Move</dt>
                 <dd></dd>
             </dl>
         </fidleset>

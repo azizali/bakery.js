@@ -55,11 +55,17 @@ $.fn.extend({
     },
     callTest:function(){
         return $(this).each(function(){
+            var fine = true;
+            var B = Bakery;
             $('dt', this).each(function(){
                 var dt = $(this),
                     dd = dt.next('dd');
-                var name = dt.text(),
+                var name = (function(dt){
+                    $('*', dt).remove();
+                    return dt.text().replace(/[\n\s]/g,'');
+                })(dt.clone()),
                     shortName = name.replace(/^.*\./, '');
+
                 eval('var ' + shortName + ' = ' + name + ';');
                 function assertMethod(method){
                     var has = false;
@@ -72,16 +78,17 @@ $.fn.extend({
                 }
                 $('th', dd).each(function(){
                     var th = $(this),
-                        name = th.text();
+                        name = th.text().replace(/\n\s/g, '');
                     var match = name.match(/(^\.)(.*)(\([^\)]*\))/);
                     if(match && match.length > 2){
-                        assertMethod(match[2]);
+                        fine = fine && assertMethod(match[2]);
                     }
                     if(th.is('.field')){
-                        assertMethod(name);
+                        fine = fine && assertMethod(name);
                     }
                 });
-            })
+            });
+            if(fine) console.log('[api test passed] signatures are fine.')
         });
     }
 });
