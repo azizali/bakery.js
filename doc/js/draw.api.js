@@ -38,7 +38,10 @@ $.fn.extend({
         $('dt', fieldset).each(function(){
            var dt = $(this),
                id = dt.attr('id'),
-               title = dt.text().replace(/^.*\./, '');
+               title = (function(dt){
+                   $('*', dt).remove();
+                   return dt.text().replace(/[\n\s]/g,'');
+               })(dt.clone());
             var li = $('<li/>').appendTo(ul);
             if(!id){
                 id = 'dt-' + fieldset.prevAll('fieldset').size()

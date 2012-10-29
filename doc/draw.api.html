@@ -222,9 +222,97 @@
         <fieldset id="field-api-color">
             <legend>color</legend>
             <dl>
-                <dt>B.draw.color.RGBA</dt>
-                <dd></dd>
+                <dt id="dt-RGBA">B.draw.color.RGBA</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new RGBA(r,g,b,a)</th>
+                            <td>
+                                create new RGBA object
+                                <br>
+                                //r, g, b means  red, blue, green, 0 ~ 255.
+                                <br>
+                                //a means alpha, 0.0 ~ 1.0
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.toString()</th>
+                            <td>returns a string to represent color</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>
+                    B.draw.color.RGB
+                    <sub class="prototype">
+                        <a href="#dt-RGBA">RGBA</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new RGB(r,g,b)</th>
+                            <td>create new RGB object</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>
+                    B.draw.color.Gray
+                    <sub class="prototype">
+                        <a href="#dt-RGBA">RGBA</a>
+                    </sub>
+                </dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new Gray(gray)</th>
+                            <td>
+                                create new Gray object.
+                                <br><i>new Gray(0)</i> will be black.
+                                <br><i>new Gray(255)</i> will be white.
+                            </td>
+                        </tr>
+                    </table>
+                </dd>
                 <dt>B.draw.color.HSV</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <th>new HSV(h,s,v)</th>
+                            <td>
+                                create new HSV object
+                                <br>
+                                //h means hue, 0~360
+                                <br>
+                                //s, v means saturation, value of brgitness, 0~100
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>.toRGBA()</th>
+                            <td>convert to RGBA object</td>
+                        </tr>
+                        <tr>
+                            <th>.toString()</th>
+                            <td>returns a string to represents color</td>
+                        </tr>
+                        <tr>
+                            <th>.clone()</th>
+                            <td>clone it self</td>
+                        </tr>
+                        <tr>
+                            <th>.addHue(h)</th>
+                            <td>add hue. 0 ~ 360</td>
+                        </tr>
+                        <tr>
+                            <th>.addSaturation(s)</th>
+                            <td>add saturation.  0 ~ 100</td>
+                        </tr>
+                        <tr>
+                            <th>.addBrightness(b)</th>
+                            <td>add brightness. 0 ~ 100</td>
+                        </tr>
+                    </table>
+                </dd>
             </dl>
         </fieldset>
 
@@ -446,13 +534,20 @@
 
             </dl>
         </fieldset>
-        <fidleset id="field-api-move">
+        <fieldset id="field-api-move">
             <legend>move</legend>
             <dl>
                 <dt>B.draw.move.Move</dt>
-                <dd></dd>
+                <dd>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <td></td>
+                        </tr>
+                    </table>
+                </dd>
             </dl>
-        </fidleset>
+        </fieldset>
     </section>
 
 </article>

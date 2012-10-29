@@ -181,6 +181,7 @@ Bakery.draw.drawable = (function (B) {
 
                 ctx.moveTo(x, t);
                 ctx.bezierCurveTo(r, t, r, b, x, b);
+
                 ctx.bezierCurveTo(l, b, l, t, x, t);
 
                 if(s.fill()) s.fillPath(ctx);

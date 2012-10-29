@@ -35,8 +35,18 @@ Bakery.draw.color = (function (B) {
             s.a = 1;
         }
     });
+    c.Gray = B.define({
+        prototype:c.RGBA,
+        init:function(gray){
+            var s = this;
+            s.r = gray;
+            s.g = gray;
+            s.b = gray;
+            s.a = 1;
+        }
+    });
     c.HSV = B.define({
-//h means hue, 0 ~ 360
+        //h means hue, 0 ~ 360
         //s, v means saturation, value of brgitness, 0 ~ 100
         init:function (h, s, v) {
             var ss = this;
