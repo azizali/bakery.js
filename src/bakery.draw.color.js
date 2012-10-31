@@ -1,4 +1,5 @@
 Bakery.draw.color = (function (B) {
+    var d = B.draw;
 
     var c = {}; // this 'c' will be Bakery.color
     c.RGBA = B.define({
@@ -22,7 +23,12 @@ Bakery.draw.color = (function (B) {
             toString:function () {
                 var s = this;
                 return 'rgba(' + s.r + ',' + s.g + ',' + s.b + ',' + s.a + ')';
+            },
+            clone:function(){
+                var s = this;
+                return new c.RGBA(s.r, s.g, s.b, s.a);
             }
+
         }
     });
     c.RGB = B.define({
@@ -118,6 +124,95 @@ Bakery.draw.color = (function (B) {
                 var ss = this;
                 ss.v += brightness;
                 return ss;
+            }
+        }
+    });
+
+    c.LinearGradient = B.define({
+        init:function(){
+            var s = this;
+            s.colorStop({});
+        },
+        field:{
+            colorStop:null
+        },
+        property:{
+            _begin:null,
+            _end:null,
+            begin:function(x, y){
+                var s = this;
+                if(!arguments.length) return s._begin;
+                s._begin = typeof arguments[0] === d.Point?
+                    arguments[0]:new d.Point(x, y);
+                return s;
+            },
+            end:function(x, y){
+                var s = this;
+                if(!arguments.length) return s._end;
+                s._end = typeof arguments[0] === d.Point?
+                    arguments[0]:new d.Point(x, y);
+                 return s;
+            },
+            _colorStop:null,
+            addColorStop:function(offset, color){
+                var s = this;
+                s.colorStop()[offset] = color.toString();
+                return s;
+            },
+            apply:function(ctx, fill_or_stroke){
+                var s = this;
+                var begin = s.begin(), end = s.end();
+                var gradient = ctx.createLinearGradient(begin.x(), begin.y(), end.x(), end.y());
+                var colorStop = s.colorStop();
+                for(var offset in colorStop){
+                    if(!colorStop.hasOwnProperty(offset)) continue;
+                    var color = colorStop[offset];
+                    gradient.addColorStop(offset, color);
+                }
+                switch(fill_or_stroke){
+                    case 'fill':
+                        ctx.fillStyle = gradient;
+                        break;
+                    case 'stroke':
+                        ctx.strokeStyle = gradient;
+                        break;
+                }
+            },
+            applyFillStyle:function(ctx){
+                var s = this;
+                return s.apply(ctx, 'fill');
+            },
+            applyStrokeStyle:function(ctx){
+                var s = this;
+                return s.apply(ctx, 'stroke');
+            }
+        }
+    });
+    c.RadialGradient = B.define({
+        prototype:c.LinearGradient,
+        init:function(){
+            var s = this;
+            s.colorStop({});
+        },
+        property:{
+            apply:function(ctx, fill_or_stroke){
+                var s = this;
+                var begin = s.begin(), end = s.end();
+                var gradient = ctx.createRadialGradient(begin.x(), begin.y(), end.x(), end.y());
+                var colorStop = s.colorStop();
+                for(var offset in colorStop){
+                    if(!colorStop.hasOwnProperty(offset)) continue;
+                    var color = colorStop[offset];
+                    gradient.addColorStop(offset, color);
+                }
+                switch(fill_or_stroke){
+                    case 'fill':
+                        ctx.fillStyle = gradient;
+                        break;
+                    case 'stroke':
+                        ctx.strokeStyle = gradient;
+                        break;
+                }
             }
         }
     });
