@@ -194,11 +194,15 @@ Bakery.draw.color = (function (B) {
             var s = this;
             s.colorStop({});
         },
+        field:{
+            beginRadius:0,
+            endRadius:0
+        },
         property:{
             apply:function(ctx, fill_or_stroke){
                 var s = this;
                 var begin = s.begin(), end = s.end();
-                var gradient = ctx.createRadialGradient(begin.x(), begin.y(), end.x(), end.y());
+                var gradient = ctx.createRadialGradient(begin.x(), begin.y(), s.beginRadius(), end.x(), end.y(), s.endRadius());
                 var colorStop = s.colorStop();
                 for(var offset in colorStop){
                     if(!colorStop.hasOwnProperty(offset)) continue;

@@ -264,8 +264,37 @@ Bakery.draw.drawable = (function (B) {
 
             }
         }
-
     });
+
+    d.Triangle = B.define({
+        prototype:d.Drawable,
+        init:function(){
+            var s = this;
+        },
+        field:{
+
+        },
+        property:{
+            draw:function(ctx){
+                var s = this;
+
+                var p = s.point(),
+                    x = p.x(), y = p.y();
+
+                var area = s.area(),
+                    t = area.top(),
+                    b = area.bottom(),
+                    l = area.left(),
+                    r = area.right();
+
+                ctx.moveTo(x, t);
+                ctx.lineTo(r, b);
+                ctx.lineTo(l, b);
+                ctx.lineTo(x, t);
+
+            }
+        }
+    }) ;
 
 
     return d;
