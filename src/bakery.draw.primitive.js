@@ -164,9 +164,12 @@ Bakery.draw = (function(B){
                 var s = this;
                 return s.expand(amount * -1);
             },
-            contains:function(point){
+            contains:function(x, y){
                 var s = this;
-                var x = point.x(), y = point.y();
+                if(arguments[0] instanceof d.Point){
+                    var point = arguments[0];
+                    x = point.x(), y = point.y();
+                }
                 return s.left() <= x
                     && x <= s.right()
                     && s.top() <= y

@@ -164,9 +164,12 @@ Bakery.draw = (function(B){
                 var s = this;
                 return s.expand(amount * -1);
             },
-            contains:function(point){
+            contains:function(x, y){
                 var s = this;
-                var x = point.x(), y = point.y();
+                if(arguments[0] instanceof d.Point){
+                    var point = arguments[0];
+                    x = point.x(), y = point.y();
+                }
                 return s.left() <= x
                     && x <= s.right()
                     && s.top() <= y
@@ -374,11 +377,15 @@ Bakery.draw.color = (function (B) {
             var s = this;
             s.colorStop({});
         },
+        field:{
+            beginRadius:0,
+            endRadius:0
+        },
         property:{
             apply:function(ctx, fill_or_stroke){
                 var s = this;
                 var begin = s.begin(), end = s.end();
-                var gradient = ctx.createRadialGradient(begin.x(), begin.y(), end.x(), end.y());
+                var gradient = ctx.createRadialGradient(begin.x(), begin.y(), s.beginRadius(), end.x(), end.y(), s.endRadius());
                 var colorStop = s.colorStop();
                 for(var offset in colorStop){
                     if(!colorStop.hasOwnProperty(offset)) continue;
@@ -773,8 +780,37 @@ Bakery.draw.drawable = (function (B) {
 
             }
         }
-
     });
+
+    d.Triangle = B.define({
+        prototype:d.Drawable,
+        init:function(){
+            var s = this;
+        },
+        field:{
+
+        },
+        property:{
+            draw:function(ctx){
+                var s = this;
+
+                var p = s.point(),
+                    x = p.x(), y = p.y();
+
+                var area = s.area(),
+                    t = area.top(),
+                    b = area.bottom(),
+                    l = area.left(),
+                    r = area.right();
+
+                ctx.moveTo(x, t);
+                ctx.lineTo(r, b);
+                ctx.lineTo(l, b);
+                ctx.lineTo(x, t);
+
+            }
+        }
+    }) ;
 
 
     return d;
