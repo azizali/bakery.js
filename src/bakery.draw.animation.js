@@ -85,19 +85,23 @@ Bakery.draw.Animation = (function(B){
                     s.frameCount(frameCount);
                 };
                 executeRender();
+                return s;
             },
             stop:function(){
                 var s = this;
-                s.stoped = true;
-                s.frameCount = 0;
+                s.stoped(true);
+                s.frameCount(0);
+                return s;
             },
             pause:function(){
                 var s = this;
-                s.pausing = true;
+                s.pausing(true);
+                return s;
             },
             resume:function(){
                 var s = this;
-                s.pausing = false;
+                s.pausing(false);
+                return s;
             }
         }
     }).__extend__({
