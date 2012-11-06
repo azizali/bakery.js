@@ -38,5 +38,13 @@ var fs = require('fs'),
         'bakery.draw.animation.js',
         'bakery.draw.drawable.js',
         'bakery.draw.move.js'
+    ],
+    'jquery.bakery.js':[
+        'jquery.bakery.basic.js',
+        'jquery.bakery.icon.js',
+        'jquery.bakery.editable.js'
+    ],
+    'jquery.bakery.css':[
+        'jquery.bakery.base.css'
     ]
 });

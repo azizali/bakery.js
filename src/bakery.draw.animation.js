@@ -1,6 +1,6 @@
 Bakery.draw.Animation = (function(B){
     var requestAnimationFrame = (function(){
-        if(typeof window === 'undefined') return;
+        if(typeof window === 'undefined') return null;
         return window.requestAnimationFrame    ||
             window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame    ||
@@ -44,10 +44,10 @@ Bakery.draw.Animation = (function(B){
                     });
                     return s;
                 }
-                var length = s.drawables.length;
+                var length = s.renderables.length;
                 if(!length) return s;
                 for(var i=0; i< length; i++){
-                    var hit = s.drawables[i] === renderable;
+                    var hit = s.renderables[i] === renderable;
                     if(hit){
                         s.renderables.splice(i, 1);
                         return s;
@@ -89,7 +89,7 @@ Bakery.draw.Animation = (function(B){
             },
             stop:function(){
                 var s = this;
-                s.stoped(true);
+                s.stopped(true);
                 s.frameCount(0);
                 return s;
             },
